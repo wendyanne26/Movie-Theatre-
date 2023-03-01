@@ -22,7 +22,7 @@ public class Main {
         Movie movie = new Movie("Mr Queen", "2021", 2500, Genre.ROMANCE, 21);
         Movie movie1 = new Movie("Fate", "2023", 2000, Genre.SCI_FI, 10);
         Movie movie2 = new Movie("Vincenzo", "2020", 1500, Genre.ACTION, 15);
-        Movie movie3 = new Movie("Merlin", "2010", 1000, Genre.SCI_FI, 2);
+        Movie movie3 = new Movie("Merlin", "2010", 1000, Genre.SCI_FI, 12);
         Movie movie4 = new Movie("Goblin", "2019", 3000, Genre.ROMANCE, 2);
 
 
@@ -38,9 +38,19 @@ public class Main {
 
 
         CustomerService customerService = new CustomerServiceImp();
-        Customer customer1 = new Customer(370000, customerService);
-        Customer customer2 = new Customer(370000, customerService);
-        Customer customer3 = new Customer(370000, customerService);
+        Customer customer1 = new Customer("Joy", 370000, customerService);
+        Customer customer2 = new Customer("John",370000, customerService);
+        Customer customer3 = new Customer("Jane",370000, customerService);
 
+        customer1.chooseMovie(movie, 3);
+        customer2.chooseMovie(movie2, 5);
+        customer3.chooseMovie(movie3, 9);
+
+
+        cashier1.addCustomerToQueue(customer1);
+        cashier1.addCustomerToQueue(customer2);
+        cashier1.addCustomerToQueue(customer3);
+
+        cashier1.checkoutQueue();
     }
 }

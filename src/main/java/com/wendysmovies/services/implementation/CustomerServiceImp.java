@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerServiceImp implements CustomerService {
-    private List<Movie> customerCart;
+    private final List<Movie> customerCart;
 
     public CustomerServiceImp() {
         this.customerCart = new ArrayList<>();

@@ -3,6 +3,7 @@ package com.wendysmovies;
 import com.wendysmovies.movie.Movie;
 import com.wendysmovies.staff.Cashier;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Theatre {
@@ -14,7 +15,8 @@ public class Theatre {
     public Theatre(String name, double accountBalance, List<Movie> catalogue) {
         this.name = name;
         this.theatreAccountBalance = accountBalance;
-
+        this.theatreCatalogue = new ArrayList<>();
+        this.cashiers = new ArrayList<>();
     }
 
     public List<Movie> getTheatreCatalogue() {
