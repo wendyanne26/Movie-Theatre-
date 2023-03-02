@@ -15,13 +15,16 @@ public class CashierServiceImp implements CashierService {
     @Override
     public void checkoutCustomer(Customer customer) {
         double totalPrice = 0.0;
-        for(Movie movie : customer.getCustomerCart()){
-            if (isMovieAvailable(movie)){
+        for (Movie movie : customer.getCustomerCart()) {
+            if (isMovieAvailable(movie)) {
                 totalPrice += movie.getPrice() * movie.getQuantity();
+            } else {
+                System.out.println("Sorry we don't have " + movie.getName() + " in stock at the moment...");
+                customer.getCustomerCart().remove(movie);
             }
         }
-        if(customer.getCustomerWallet() >= totalPrice){
-            for(Movie movie : customer.getCustomerCart()){
+        if (customer.getCustomerWallet() >= totalPrice) {
+            for (Movie movie : customer.getCustomerCart()) {
                 updateMoviesCatalogue(movie, movie.getQuantity());
             }
             theatre.setTheatreAccountBalance(theatre.getTheatreAccountBalance() + totalPrice);
@@ -32,19 +35,17 @@ public class CashierServiceImp implements CashierService {
     @Override
     public boolean isMovieAvailable(Movie movie) {
         for (Movie currentMovie : theatre.getTheatreCatalogue()) {
-            if (currentMovie.getName().equals(movie.getName())) {
+            if (currentMovie.getName().equals(movie.getName()) && currentMovie.getQuantity()>= movie.getQuantity()) {
                 return true;
             }
         }
         return false;
     }
 
-
-
     @Override
     public void updateMoviesCatalogue(Movie movie, int quantity) {
-        for(Movie currentMovie : theatre.getTheatreCatalogue()){
-            if(movie.getName().equals(currentMovie.getName())){
+        for (Movie currentMovie : theatre.getTheatreCatalogue()) {
+            if (movie.getName().equals(currentMovie.getName())) {
                 currentMovie.setQuantity(currentMovie.getQuantity() - quantity);
                 break;
             }

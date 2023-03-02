@@ -48,4 +48,12 @@ public class Customer implements Comparable<Customer> {
     public int compareTo(Customer nextCustomer) {
         return this.getTimeOfArrival().compareTo(nextCustomer.getTimeOfArrival());
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "name='" + name + '\'' +
+                ", timeOfArrival='" + timeOfArrival + '\'' +
+                '}';
+    }
 }

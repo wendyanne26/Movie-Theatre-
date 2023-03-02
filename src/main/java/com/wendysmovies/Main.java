@@ -4,6 +4,7 @@ import com.wendysmovies.customer.Customer;
 import com.wendysmovies.enums.Genre;
 import com.wendysmovies.enums.Roles;
 import com.wendysmovies.movie.Movie;
+import com.wendysmovies.services.CartComparator;
 import com.wendysmovies.services.CashierService;
 import com.wendysmovies.services.CustomerService;
 import com.wendysmovies.services.ManagerService;
@@ -32,8 +33,9 @@ public class Main {
 
 
         CashierService cashierService = new CashierServiceImp(theatre1);
+        CartComparator cartComparator = new CartComparator();
         Cashier cashier = new Cashier("Nike", Roles.CASHIER, cashierService);
-        Cashier cashier1 = new Cashier("Lillian", Roles.CASHIER, cashierService);
+        Cashier cashier1 = new Cashier("Lillian", Roles.CASHIER, cashierService, cartComparator);
         manager.hireCashier(new ArrayList<>(List.of(cashier, cashier1)));
 
 
@@ -46,11 +48,32 @@ public class Main {
         customer2.chooseMovie(movie2, 5);
         customer3.chooseMovie(movie3, 9);
 
+        cashier.addCustomerToQueue(customer1);
+        cashier.addCustomerToQueue(customer2);
+        cashier.addCustomerToQueue(customer3);
 
-        cashier1.addCustomerToQueue(customer1);
-        cashier1.addCustomerToQueue(customer2);
-        cashier1.addCustomerToQueue(customer3);
+        System.out.println("Cashier: " + cashier.getName() + " has started attending to the queue...");
+        cashier.checkoutQueue();
 
+
+        Customer customer4 = new Customer("Joy", 370000, customerService);
+        Customer customer5 = new Customer("John",370000, customerService);
+        Customer customer6 = new Customer("Jane",370000, customerService);
+
+        customer1.chooseMovie(movie, 3);
+        customer1.chooseMovie(movie4, 3);
+        customer1.chooseMovie(movie2, 3);
+
+        customer2.chooseMovie(movie2, 5);
+
+        customer3.chooseMovie(movie3, 9);
+        customer3.chooseMovie(movie4, 9);
+
+        cashier1.addCustomerToQueue(customer4);
+        cashier1.addCustomerToQueue(customer5);
+        cashier1.addCustomerToQueue(customer6);
+
+        System.out.println("Cashier: " + cashier1.getName() + " has started attending to the queue...");
         cashier1.checkoutQueue();
     }
 }
